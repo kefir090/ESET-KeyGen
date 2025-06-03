@@ -124,7 +124,7 @@ jobs:
           elif [[ ${KEY} -ne 0 ]]; then
             python3 main.py --auto-detect-browser ${KEY_TYPE} --email-api ${MAIL} --skip-update-check --no-logo --disable-progress-bar --disable-logging --repeat ${KEY}
             echo -e "\nKey:" >> $GITHUB_STEP_SUMMARY
-            cat ./*KEYS.txt >> $GITHUB_STEP_SUMMARY
+            grep -oE 'License Key: ([A-Z0-9]{4}-){4}[A-Z0-9]{4}' ./*KEYS.txt | cut -d' ' -f3 >> $GITHUB_STEP_SUMMARY
           fi
   Windows:
     runs-on: windows-latest
